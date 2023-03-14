@@ -1,0 +1,92 @@
+---
+
+# Credentials for CVP and EOS Switches
+ansible_user: admin
+ansible_password: admin # Update password with lab credentials
+ansible_network_os: arista.eos.eos
+# Configure privilege escalation
+ansible_become: true
+ansible_become_method: enable
+# HTTPAPI configuration
+ansible_connection: httpapi
+ansible_httpapi_port: 443
+ansible_httpapi_use_ssl: true
+ansible_httpapi_validate_certs: false
+ansible_python_interpreter: $(which python3)
+
+# AAA
+# aaa_authentication:
+#   login:
+#     default: local
+
+# aaa_authorization:
+#   exec:
+#     default: local
+#   commands:
+#     all_default: local
+
+# Radius Group and Server
+# aaa_server_groups:
+#   - name: atds
+#     type: radius
+#     servers:
+#       - server: 192.168.0.1
+
+# radius_servers:
+#   - host: 192.168.0.1
+#     key: 0207165218120E
+#     vrf: MGMT
+
+# ip_radius_source_interfaces:
+#   - name: Management0
+#     vrf: MGMT
+
+# local users
+local_users:
+  admin:
+    privilege: 15
+    role: network-admin
+    # Update sha512_password and ssh_key (leave ssh-rsa in place) from one of your Lab switches
+    sha512_password: "$6$zcVQubgL4InqCyPk$oRuQq7RH0qV0mBmZniUxeRFeVlIxyGbouUlnWI5grTPozQLZd84FGq2IWO0CyHSQQm2BQfz/qVaNP2XbXZZGO/"
+
+# OOB Management network default gateway.
+mgmt_gateway: 172.100.100.1
+mgmt_interface: Management0
+mgmt_interface_vrf: MGMT
+
+# NTP Servers IP or DNS name, first NTP server will be prefered, and sourced from Managment VRF
+ntp:
+  servers:
+    - name: time.google.com
+      iburst: true
+      local_interface: Management0
+      vrf: MGMT
+
+name_server:
+  source:
+    vrf: MGMT
+  nodes:
+    - 8.8.8.8
+
+# Domain/DNS
+dns_domain: example.com
+
+# TerminAttr
+# daemon_terminattr:
+#   # Address of the gRPC server on CloudVision
+#   # TCP 9910 is used on on-prem
+#   # TCP 443 is used on CV as a Service
+#   cvaddrs: # For single cluster
+#     - 192.168.0.5:9910
+#   # Authentication scheme used to connect to CloudVision
+#   # Deprecated Key Method, use Token
+#   # cvauth:
+#   #   method: key
+#   #   key: atd-lab
+#   cvauth:
+#     method: token
+#     token_file: "/tmp/token"
+#   # Exclude paths from Sysdb on the ingest side
+#   ingestexclude: /Sysdb/cell/1/agent,/Sysdb/cell/2/agent
+#   # Exclude paths from the shared memory table
+#   smashexcludes: ale,flexCounter,hardware,kni,pulse,strata

@@ -1,0 +1,157 @@
+---
+# -------------------------------------------------------------
+# Arista Data Center Topology
+# 2 Spines & 2 Leaf Pairs with MLAG
+# -------------------------------------------------------------
+
+#https://containerlab.dev/manual/topo-def-file/#name
+name: L2LS
+
+#https://containerlab.dev/manual/topo-def-file/#prefix
+prefix: ""
+
+#https://containerlab.dev/manual/network/#configuring-management-network
+mgmt:
+  network: mgmt
+  ipv4_subnet: 172.100.100.0/24
+
+#https://containerlab.dev/manual/topo-def-file/#topology
+topology:
+
+  defaults:
+    env:
+      INTFTYPE: et
+
+  kinds:
+    ceos:
+      image: ceos:4.29.1F
+
+  nodes:
+
+#########################
+# SPINE                 #
+#########################
+
+#https://containerlab.dev/manual/topo-def-file/#nodes
+    SPINE1:
+      kind: ceos
+      mgmt_ipv4: 172.100.100.101
+      startup-config: startup-configs/SPINE1.cfg
+      ports:
+        - '22001:22'
+        - '8001:80'
+        - '44301:443'
+
+    SPINE2:
+      kind: ceos
+      mgmt_ipv4: 172.100.100.102
+      startup-config: startup-configs/SPINE2.cfg
+      ports:
+        - '22002:22'
+        - '8002:80'
+        - '44302:443'
+
+#########################
+# LEAF                  #
+#########################
+
+    LEAF1:
+      kind: ceos
+      mgmt_ipv4: 172.100.100.103
+      startup-config: startup-configs/LEAF1.cfg
+      ports:
+        - '22003:22'
+        - '8003:80'
+        - '44303:443'
+
+    LEAF2:
+      kind: ceos
+      mgmt_ipv4: 172.100.100.104
+      startup-config: startup-configs/LEAF2.cfg
+      ports:
+        - '22004:22'
+        - '8004:80'
+        - '44304:443'
+
+    LEAF3:
+      kind: ceos
+      mgmt_ipv4: 172.100.100.105
+      startup-config: startup-configs/LEAF3.cfg
+      ports:
+        - '22005:22'
+        - '8005:80'
+        - '44305:443'
+
+    LEAF4:
+      kind: ceos
+      mgmt_ipv4: 172.100.100.106
+      startup-config: startup-configs/LEAF4.cfg
+      ports:
+        - '22006:22'
+        - '8006:80'
+        - '44306:443'
+
+    LEAF5:
+      kind: ceos
+      mgmt_ipv4: 172.100.100.107
+      startup-config: startup-configs/LEAF5.cfg
+      ports:
+        - '22007:22'
+        - '8007:80'
+        - '44307:443'
+
+    LEAF6:
+      kind: ceos
+      mgmt_ipv4: 172.100.100.108
+      startup-config: startup-configs/LEAF6.cfg
+      ports:
+        - '22008:22'
+        - '8008:80'
+        - '44308:443'
+
+#https://containerlab.dev/manual/topo-def-file/#links
+  links:
+
+####################
+# SPINE1 to LEAF   #
+####################
+    - endpoints: ["SPINE1:et1_1", "LEAF1:et53_1"]
+    - endpoints: ["SPINE1:et2_1", "LEAF2:et53_1"]
+    - endpoints: ["SPINE1:et3_1", "LEAF3:et53_1"]
+    - endpoints: ["SPINE1:et4_1", "LEAF4:et53_1"]
+    - endpoints: ["SPINE1:et5_1", "LEAF5:et29_1"]
+    - endpoints: ["SPINE1:et6_1", "LEAF6:et29_1"]
+
+####################
+# SPINE2 to LEAF   #
+####################
+    - endpoints: ["SPINE2:et1_1", "LEAF1:et54_1"]
+    - endpoints: ["SPINE2:et2_1", "LEAF2:et54_1"]
+    - endpoints: ["SPINE2:et3_1", "LEAF3:et54_1"]
+    - endpoints: ["SPINE2:et4_1", "LEAF4:et54_1"]
+    - endpoints: ["SPINE2:et5_1", "LEAF5:et30_1"]
+    - endpoints: ["SPINE2:et6_1", "LEAF6:et30_1"]
+
+####################
+# SPINE1 to SPINE2 #
+####################
+    - endpoints: ["SPINE1:et31_1", "SPINE2:et31_1"]
+    - endpoints: ["SPINE1:et32_1", "SPINE2:et32_1"]
+
+####################
+# LEAF1 to LEAF2   #
+####################
+    - endpoints: ["LEAF1:et55_1", "LEAF2:et55_1"]
+    - endpoints: ["LEAF1:et56_1", "LEAF2:et56_1"]
+
+####################
+# LEAF3 to LEAF4   #
+####################
+    - endpoints: ["LEAF3:et55_1", "LEAF4:et55_1"]
+    - endpoints: ["LEAF3:et56_1", "LEAF4:et56_1"]
+
+####################
+# LEAF5 to LEAF6   #
+####################
+    - endpoints: ["LEAF5:et31_1", "LEAF6:et31_1"]
+    - endpoints: ["LEAF5:et32_1", "LEAF6:et32_1"]

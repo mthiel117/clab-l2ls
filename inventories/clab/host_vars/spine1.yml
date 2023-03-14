@@ -1,0 +1,3 @@
+ansible_host: clab1.packetanglers.com
+ansible_port: 22001
+ansible_httpapi_port: 44301

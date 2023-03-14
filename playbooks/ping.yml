@@ -1,0 +1,8 @@
+---
+- name: Test Authentication to Nodes
+  hosts: '{{ targets }}'
+
+  tasks:
+
+  - name: Ping Hosts
+    ping:

@@ -1,0 +1,80 @@
+---
+fabric_name: CLAB_FABRIC
+
+# Set Design Type to L2ls
+design:
+  type: l2ls
+
+# Spine Switches
+l3spine:
+  defaults:
+    platform: vEOS
+    spanning_tree_mode: mstp
+    spanning_tree_priority: 4096
+    loopback_ipv4_pool: 1.1.1.0/24
+    mlag_peer_ipv4_pool: 10.0.0.0/24
+    mlag_peer_l3_ipv4_pool: 10.1.1.0/24
+    virtual_router_mac_address: aa:aa:bb:bb:cc:cc
+    mlag_interfaces: [Ethernet31/1, Ethernet32/1]
+  node_groups:
+    SPINES:
+      nodes:
+        spine1:
+          id: 1
+          mgmt_ip: 172.100.100.101/24
+        spine2:
+          id: 2
+          mgmt_ip: 172.100.100.102/24
+
+# IDF - Leaf Switches
+leaf:
+  defaults:
+    platform: vEOS
+    mlag_peer_ipv4_pool: 10.0.0.0/24
+    spanning_tree_mode: mstp
+    spanning_tree_priority: 16384
+    uplink_switches: [spine1, spine2]
+    uplink_interfaces: [Ethernet53/1, Ethernet54/1]
+    mlag_interfaces: [Ethernet55/1, Ethernet56/1]
+  node_groups:
+    RACK1:
+      mlag: true
+      filter:
+        tags: [ "10" ]
+      nodes:
+        leaf1:
+          id: 3
+          mgmt_ip: 172.100.100.103/24
+          uplink_switch_interfaces: [Ethernet1/1, Ethernet1/1]
+        leaf2:
+          id: 4
+          mgmt_ip: 172.100.100.104/24
+          uplink_switch_interfaces: [Ethernet2/1, Ethernet2/1]
+    RACK2:
+      mlag: true
+      filter:
+        tags: [ "20" ]
+      nodes:
+        leaf3:
+          id: 5
+          mgmt_ip: 172.100.100.105/24
+          uplink_switch_interfaces: [Ethernet3/1, Ethernet3/1]
+        leaf4:
+          id: 6
+          mgmt_ip: 172.100.100.106/24
+          uplink_switch_interfaces: [Ethernet4/1, Ethernet4/1]
+    RACK3:
+      mlag: true
+      filter:
+        tags: [ "30" ]
+      uplink_interfaces: [Ethernet29/1, Ethernet30/1]
+      mlag_interfaces: [Ethernet31/1, Ethernet32/1]
+      nodes:
+        leaf5:
+          id: 7
+          mgmt_ip: 172.100.100.107/24
+          uplink_switch_interfaces: [Ethernet5/1, Ethernet5/1]
+        leaf6:
+          id: 8
+          mgmt_ip: 172.100.100.108/24
+          uplink_switch_interfaces: [Ethernet6/1, Ethernet6/1]
