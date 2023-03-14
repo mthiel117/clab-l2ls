@@ -16,10 +16,10 @@ Open Repository in devcontainer.  Change directory to `/workspace/Projects/clab-
 
 ``` bash
 # Build CLAB Configs
-make build-clab
+make build
 ```
 
 ``` bash
 # Deploy CLAB Configs
-make deploy-clab
+make deploy
 ```
