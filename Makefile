@@ -8,7 +8,7 @@ help: ## Display help message
 
 .PHONY: ping
 ping: # Ping CLAB Nodes - running in GCP
-	ansible-playbook playbooks/ping.yml -i inventories/clab/inventory.yml -e "targets=CLAB_FABRIC"
+	ansible-playbook playbooks/ping.yml
 
 ######################################################################
 # BUILD
@@ -16,7 +16,7 @@ ping: # Ping CLAB Nodes - running in GCP
 
 .PHONY: build
 build: ## Build CLAB Configs
-	ansible-playbook playbooks/build.yml -i inventories/clab/inventory.yml -e "targets=CLAB_FABRIC"
+	ansible-playbook playbooks/build.yml
 
 ######################################################################
 # DEPLOY eAPI
@@ -24,4 +24,4 @@ build: ## Build CLAB Configs
 
 .PHONY: deploy
 deploy: ## Deploy CLAB Configs via eAPI
-	ansible-playbook playbooks/deploy.yml -i inventories/clab/inventory.yml -e "targets=CLAB_FABRIC"
+	ansible-playbook playbooks/deploy.yml

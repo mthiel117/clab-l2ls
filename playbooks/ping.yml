@@ -1,8 +1,8 @@
 ---
 - name: Test Authentication to Nodes
-  hosts: '{{ targets }}'
+  hosts: CLAB_FABRIC
 
   tasks:
 
-  - name: Ping Hosts
-    ping:
+    - name: Ping Hosts
+      ping:

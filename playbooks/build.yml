@@ -1,6 +1,6 @@
 ---
 - name: Build Switch configuration
-  hosts: '{{ targets }}'
+  hosts: CLAB_FABRIC
 
   tasks:
 

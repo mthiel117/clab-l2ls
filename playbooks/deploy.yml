@@ -1,6 +1,6 @@
 ---
 - name: Deploy Switch configuration
-  hosts: '{{ targets }}'
+  hosts: CLAB_FABRIC
 
   tasks:
 
