@@ -415,9 +415,9 @@ interface Loopback0
 
 | Interface | VRF | IP Address | IP Address Virtual | IP Router Virtual Address | VRRP | ACL In | ACL Out |
 | --------- | --- | ---------- | ------------------ | ------------------------- | ---- | ------ | ------- |
-| Vlan10 |  default  |  -  |  -  |  -  |  -  |  -  |  -  |
-| Vlan20 |  default  |  -  |  -  |  -  |  -  |  -  |  -  |
-| Vlan30 |  default  |  -  |  -  |  -  |  -  |  -  |  -  |
+| Vlan10 |  default  |  10.10.10.3/24  |  -  |  10.10.10.1  |  -  |  -  |  -  |
+| Vlan20 |  default  |  10.20.20.3/24  |  -  |  10.20.20.1  |  -  |  -  |  -  |
+| Vlan30 |  default  |  10.30.30.3/24  |  -  |  10.30.30.1  |  -  |  -  |  -  |
 | Vlan4093 |  default  |  10.1.1.1/31  |  -  |  -  |  -  |  -  |  -  |
 | Vlan4094 |  default  |  10.0.0.1/31  |  -  |  -  |  -  |  -  |  -  |
 
@@ -428,14 +428,20 @@ interface Loopback0
 interface Vlan10
    description Ten
    no shutdown
+   ip address 10.10.10.3/24
+   ip virtual-router address 10.10.10.1
 !
 interface Vlan20
    description Twenty
    no shutdown
+   ip address 10.20.20.3/24
+   ip virtual-router address 10.20.20.1
 !
 interface Vlan30
    description Thirty
    no shutdown
+   ip address 10.30.30.3/24
+   ip virtual-router address 10.30.30.1
 !
 interface Vlan4093
    description MLAG_PEER_L3_PEERING

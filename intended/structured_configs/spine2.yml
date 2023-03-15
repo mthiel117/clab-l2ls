@@ -73,18 +73,27 @@ vlan_interfaces:
     - '10'
     description: Ten
     shutdown: false
+    ip_address: 10.10.10.3/24
+    ip_virtual_router_addresses:
+    - 10.10.10.1
   Vlan20:
     tenant: MY_FABRIC
     tags:
     - '20'
     description: Twenty
     shutdown: false
+    ip_address: 10.20.20.3/24
+    ip_virtual_router_addresses:
+    - 10.20.20.1
   Vlan30:
     tenant: MY_FABRIC
     tags:
     - '30'
     description: Thirty
     shutdown: false
+    ip_address: 10.30.30.3/24
+    ip_virtual_router_addresses:
+    - 10.30.30.1
 port_channel_interfaces:
   Port-Channel311:
     description: MLAG_PEER_spine1_Po311
