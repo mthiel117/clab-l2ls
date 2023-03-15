@@ -109,7 +109,7 @@ port_channel_interfaces:
     type: switched
     shutdown: false
     mode: trunk
-    vlans: '10'
+    vlans: 10,20,30
     mlag: 11
   Port-Channel31:
     description: RACK2_Po531

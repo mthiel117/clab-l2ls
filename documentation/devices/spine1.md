@@ -265,8 +265,8 @@ vlan 4094
 
 | Interface | Description | Mode | VLANs | Native VLAN | Trunk Group | Channel-Group |
 | --------- | ----------- | ---- | ----- | ----------- | ----------- | ------------- |
-| Ethernet1/1 | LEAF1_Ethernet53/1 | *trunk | *10 | *- | *- | 11 |
-| Ethernet2/1 | LEAF2_Ethernet53/1 | *trunk | *10 | *- | *- | 11 |
+| Ethernet1/1 | LEAF1_Ethernet53/1 | *trunk | *10,20,30 | *- | *- | 11 |
+| Ethernet2/1 | LEAF2_Ethernet53/1 | *trunk | *10,20,30 | *- | *- | 11 |
 | Ethernet3/1 | LEAF3_Ethernet53/1 | *trunk | *20 | *- | *- | 31 |
 | Ethernet4/1 | LEAF4_Ethernet53/1 | *trunk | *20 | *- | *- | 31 |
 | Ethernet5/1 | LEAF5_Ethernet29/1 | *trunk | *30 | *- | *- | 51 |
@@ -329,7 +329,7 @@ interface Ethernet32/1
 
 | Interface | Description | Type | Mode | VLANs | Native VLAN | Trunk Group | LACP Fallback Timeout | LACP Fallback Mode | MLAG ID | EVPN ESI |
 | --------- | ----------- | ---- | ---- | ----- | ----------- | ------------| --------------------- | ------------------ | ------- | -------- |
-| Port-Channel11 | RACK1_Po531 | switched | trunk | 10 | - | - | - | - | 11 | - |
+| Port-Channel11 | RACK1_Po531 | switched | trunk | 10,20,30 | - | - | - | - | 11 | - |
 | Port-Channel31 | RACK2_Po531 | switched | trunk | 20 | - | - | - | - | 31 | - |
 | Port-Channel51 | RACK3_Po291 | switched | trunk | 30 | - | - | - | - | 51 | - |
 | Port-Channel311 | MLAG_PEER_spine2_Po311 | switched | trunk | 2-4094 | - | ['LEAF_PEER_L3', 'MLAG'] | - | - | - | - |
@@ -342,7 +342,7 @@ interface Port-Channel11
    description RACK1_Po531
    no shutdown
    switchport
-   switchport trunk allowed vlan 10
+   switchport trunk allowed vlan 10,20,30
    switchport mode trunk
    mlag 11
 !

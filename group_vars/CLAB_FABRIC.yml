@@ -39,8 +39,8 @@ leaf:
   node_groups:
     RACK1:
       mlag: true
-      filter:
-        tags: [ "10" ]
+      # filter:
+      #   tags: [ "10","20" ]
       nodes:
         leaf1:
           id: 3
